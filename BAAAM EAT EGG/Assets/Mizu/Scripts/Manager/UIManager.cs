@@ -13,7 +13,11 @@ namespace Mizu
         [SerializeField] private Button _upgrade2;
         [SerializeField] private Button _upgrade3;
 
-        [SerializeField] private TMP_Text _goldText;
+        [SerializeField] private TMP_Text _moneyText;
+        [SerializeField] private TMP_Text _scoreText;
+
+        private int _score = 0;
+        public int Money { get; private set; } = 0;
 
         private void Awake()
         {
@@ -23,6 +27,12 @@ namespace Mizu
             _upgrade3.onClick.AddListener(OnUpgrade3);
         }
 
+        private void Start()
+        {
+            SetScore();
+            SetMoney();
+        }
+
         private void OnSettingsButton()
         {
             Debug.Log("Settings");
@@ -30,17 +40,27 @@ namespace Mizu
 
         private void OnUpgrade1()
         {
-            Debug.Log("Upgrade1");
+            Debug.Log(_upgrade1.gameObject.name);
         }
 
         private void OnUpgrade2()
         {
-            Debug.Log("Upgrade2");
+            Debug.Log(_upgrade2.gameObject.name);
         }
 
         private void OnUpgrade3()
         {
-            Debug.Log("Upgrade3");
+            Debug.Log(_upgrade3.gameObject.name);
+        }
+
+        private void SetScore()
+        {
+            _scoreText.text = $"{_score}";
+        }
+
+        private void SetMoney()
+        {
+            _moneyText.text = $"{Money}";
         }
     }
 }
