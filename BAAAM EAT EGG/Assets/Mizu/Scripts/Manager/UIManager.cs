@@ -2,35 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Mizu
 {
     public sealed class UIManager : MonoBehaviour
     {
+        [Header("Settings")]
         [SerializeField] private Button _settingsButton;
-        [SerializeField] private Button _upgrade1;
-        [SerializeField] private Button _upgrade2;
-        [SerializeField] private Button _upgrade3;
+        
+        [Header("Upgrades")]
+        [SerializeField] private Button _speedUpgradeBtn;
+        [SerializeField] private Button _lengthUpgradeBtn;
+        [SerializeField] private Button _incomeUpgradeBtn;
+        [SerializeField] private TMP_Text _speedUpgradeCost;
+        [SerializeField] private TMP_Text _lengthUpgradeCost;
+        [SerializeField] private TMP_Text _incomeUpgradeCost;
 
+        [Header("Scores")]
         [SerializeField] private TMP_Text _moneyText;
-        [SerializeField] private TMP_Text _scoreText;
+        [SerializeField] private TMP_Text _gotMoneyText;
+
 
         private int _score = 0;
         public int Money { get; private set; } = 0;
 
-        private void Awake()
-        {
-            _settingsButton.onClick.AddListener(OnSettingsButton);
-            _upgrade1.onClick.AddListener(OnUpgrade1);
-            _upgrade2.onClick.AddListener(OnUpgrade2);
-            _upgrade3.onClick.AddListener(OnUpgrade3);
-        }
-
         private void Start()
         {
-            SetScore();
+            Initialize();
+            
             SetMoney();
+        }
+        
+        private void Initialize()
+        {
+            _settingsButton.onClick.AddListener(OnSettingsButton);
+            
+            _speedUpgradeBtn.onClick.AddListener(SpeedUpgrade);
+            _lengthUpgradeBtn.onClick.AddListener(LengthUpgrade);
+            _incomeUpgradeBtn.onClick.AddListener(IncomeUpgrade);
+
+            _gotMoneyText.gameObject.SetActive(false);
         }
 
         private void OnSettingsButton()
@@ -38,29 +51,36 @@ namespace Mizu
             Debug.Log("Settings");
         }
 
-        private void OnUpgrade1()
+        private void SpeedUpgrade()
         {
-            Debug.Log(_upgrade1.gameObject.name);
+            Debug.Log(_speedUpgradeBtn.gameObject.name);
+            GameManager.Inst.BamMng.SetBamSpeed();
         }
 
-        private void OnUpgrade2()
+        private void LengthUpgrade()
         {
-            Debug.Log(_upgrade2.gameObject.name);
+            Debug.Log(_lengthUpgradeBtn.gameObject.name);
+            GameManager.Inst.BamMng.SetBamLength();
         }
 
-        private void OnUpgrade3()
+        private void IncomeUpgrade()
         {
-            Debug.Log(_upgrade3.gameObject.name);
-        }
-
-        private void SetScore()
-        {
-            _scoreText.text = $"{_score}";
+            Debug.Log(_incomeUpgradeBtn.gameObject.name);
         }
 
         private void SetMoney()
         {
             _moneyText.text = $"{Money}";
+        }
+
+        public void SetEarnMoney(int earnedMoney)
+        {
+            _gotMoneyText.gameObject.SetActive(true);
+            _gotMoneyText.text = $"{earnedMoney}";
+            Debug.Log(earnedMoney);
+            
+            Money += earnedMoney;
+            SetMoney();
         }
     }
 }
