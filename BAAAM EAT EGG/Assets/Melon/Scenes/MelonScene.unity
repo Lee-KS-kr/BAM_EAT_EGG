@@ -216,11 +216,13 @@ MonoBehaviour:
   pool: {fileID: 1132299477}
   BamList: []
   bodyPosition: []
+  posObjList: []
   head: {fileID: 726255186998803322, guid: 932c2f02533ae4c3f8f7692a7b4d3714, type: 3}
   tail: {fileID: 3695342526453025226, guid: e840ceda79bb04c099d56909884d29fc, type: 3}
-  radian: 5
-  speed: 100
-  count: 15
+  emptyObj: {fileID: 89840460948360363, guid: 3403fff909c1047fb83bd521b42ab84a, type: 3}
+  radian: 3
+  speed: -100
+  count: 8
 --- !u!4 &594919283
 Transform:
   m_ObjectHideFlags: 0
