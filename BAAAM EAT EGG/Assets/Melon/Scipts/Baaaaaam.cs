@@ -7,8 +7,8 @@ using Mizu;
 public class Baaaaaam : MonoBehaviour
 {
     [SerializeField] ObjectPool pool;
-    [SerializeField] List<GameObject> BamList = new List<GameObject>();
     [SerializeField] List<GameObject> posObjList = new List<GameObject>();
+    [SerializeField] List<GameObject> bodyList = new List<GameObject>();
     [SerializeField] GameObject head;
     [SerializeField] GameObject tail;
     [SerializeField] GameObject emptyObj;
@@ -71,17 +71,42 @@ public class Baaaaaam : MonoBehaviour
 
     public void tailSet()
     {
-        
+        //머리가 꼬리뒤에 있을경우
         if(index == 0)
         {
-            tailObj = Instantiate(tail, posObjList[index].transform.position, Quaternion.identity);
-            tailObj.transform.SetParent(transform);
+            //꼬리를 생성하지 않았다면 꼬리를 먼저 생성
+            if (tailObj == null)
+            {
+                tailObj = Instantiate(tail, posObjList[index].transform.position, Quaternion.identity);
+                tailObj.transform.SetParent(transform);
+            }
             index++;
             return;
         }
+
+        //body pool에서 몸통을 꺼내와 사용
         tailObj.transform.position = posObjList[index].transform.position;
-        pool.GetObject(transform, posObjList[index - 1].transform.position);
+        bodyList.Add(pool.GetObject(transform, posObjList[index - 1].transform.position));
+
+        //뱀의 길이가 최대가 되었을때 => 꼬리의 다음위치가 머리일때 뱀을 초기화 한다.
+        if(index >= posObjList.Count - 1)
+        {
+            resetBaaam();
+            return;
+        }
 
         index++;
+    }
+
+    //최대 길이가 되었을때 모든 몸을 반환하고 꼬리를 다시 머리 뒤로 이동
+    public void resetBaaam()
+    {
+        Debug.Log("최대 길이입니다.");
+        for(int i = 0; i< bodyList.Count; i++)
+        {
+            pool.ReturnObject(bodyList[i]);
+        }
+        tailObj.transform.position = posObjList[0].transform.position;
+        index = 1;
     }
 }
