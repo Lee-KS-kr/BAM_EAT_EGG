@@ -8,7 +8,6 @@ public class Baaaaaam : MonoBehaviour
 {
     [SerializeField] ObjectPool pool;
     [SerializeField] List<GameObject> BamList = new List<GameObject>();
-    [SerializeField] List<Vector3> bodyPosition = new List<Vector3>();
     [SerializeField] List<GameObject> posObjList = new List<GameObject>();
     [SerializeField] GameObject head;
     [SerializeField] GameObject tail;
@@ -17,6 +16,12 @@ public class Baaaaaam : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] int count;
     int index = 0;
+
+
+
+    public float BaaamSpeed { get => speed; }
+    public int BaaamCount { get => count; }
+    public int BaaamIndex { get => index; }
 
     GameObject tailObj;
 
@@ -48,8 +53,6 @@ public class Baaaaaam : MonoBehaviour
             float x = Mathf.Sin(rad);
             float y = Mathf.Cos(rad);
             x *= radian; y *= radian;
-            //GameObject obj =  pool.GetObject(transform, new Vector3(x, 4, y));
-            //BamList.Add(obj);
 
             //첫번째 경우 머리 생성
             if(i == 0)
@@ -59,7 +62,6 @@ public class Baaaaaam : MonoBehaviour
                 continue;
             }
             //몸통 좌표 저장
-            bodyPosition.Add(new Vector3(x, 4, y));
             GameObject eObj = Instantiate(emptyObj, new Vector3(x, 4, y), Quaternion.identity);
             eObj.transform.SetParent(transform);
             posObjList.Add(eObj);
@@ -72,16 +74,11 @@ public class Baaaaaam : MonoBehaviour
         
         if(index == 0)
         {
-            //tailObj =  Instantiate(tail, bodyPosition[index], Quaternion.identity);
             tailObj = Instantiate(tail, posObjList[index].transform.position, Quaternion.identity);
             tailObj.transform.SetParent(transform);
             index++;
             return;
         }
-
-        //tailObj.transform.position = bodyPosition[index];
-        //pool.GetObject(transform, bodyPosition[index - 1]);
-
         tailObj.transform.position = posObjList[index].transform.position;
         pool.GetObject(transform, posObjList[index - 1].transform.position);
 
