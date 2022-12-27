@@ -16,7 +16,7 @@ public class Baaaaaam : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] int count;
     int index = 0;
-
+    float NextY;
 
 
     public float BaaamSpeed { get => speed; }
@@ -62,7 +62,7 @@ public class Baaaaaam : MonoBehaviour
                 continue;
             }
             //몸통 좌표 저장
-            GameObject eObj = Instantiate(emptyObj, new Vector3(x, 4, y), Quaternion.identity);
+            GameObject eObj = Instantiate(emptyObj, new Vector3(x, 4, y), Quaternion.Euler(0,Mathf.Rad2Deg * rad, 0));
             eObj.transform.SetParent(transform);
             posObjList.Add(eObj);
         }
@@ -86,8 +86,8 @@ public class Baaaaaam : MonoBehaviour
 
         //body pool에서 몸통을 꺼내와 사용
         tailObj.transform.position = posObjList[index].transform.position;
-        bodyList.Add(pool.GetObject(transform, posObjList[index - 1].transform.position));
-
+        bodyList.Add(pool.GetObject(posObjList[index - 1].transform, posObjList[index - 1].transform.position));
+        bodyList[index - 1].transform.rotation = posObjList[index - 1].transform.rotation;
         //뱀의 길이가 최대가 되었을때 => 꼬리의 다음위치가 머리일때 뱀을 초기화 한다.
         if(index >= posObjList.Count - 1)
         {
@@ -99,11 +99,12 @@ public class Baaaaaam : MonoBehaviour
     }
 
     //최대 길이가 되었을때 모든 몸을 반환하고 꼬리를 다시 머리 뒤로 이동
-    public void resetBaaam()
+    void resetBaaam()
     {
         Debug.Log("최대 길이입니다.");
         for(int i = 0; i< bodyList.Count; i++)
         {
+            //bodyList[i].transform.rotation = Quaternion.identity;
             pool.ReturnObject(bodyList[i]);
         }
         tailObj.transform.position = posObjList[0].transform.position;

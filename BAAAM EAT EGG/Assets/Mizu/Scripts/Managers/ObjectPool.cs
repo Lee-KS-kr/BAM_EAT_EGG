@@ -50,6 +50,7 @@ namespace Mizu
             var obj = objectPool.Dequeue();
             obj.transform.parent = newParent;
             obj.transform.position = newPos;
+            obj.transform.rotation = Quaternion.Euler(0, 0, 0);
             obj.SetActive(true);
             poolCount--;
 
@@ -72,6 +73,7 @@ namespace Mizu
             obj.SetActive(false);
             obj.transform.parent = transform;
             obj.transform.position = transform.position;
+            obj.transform.rotation = Quaternion.Euler(0, 0, 0);
             objectPool.Enqueue(obj);
             poolCount++;
         }
