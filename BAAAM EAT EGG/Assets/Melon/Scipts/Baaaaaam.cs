@@ -86,10 +86,13 @@ public class Baaaaaam : MonoBehaviour
 
         //body pool에서 몸통을 꺼내와 사용
         tailObj.transform.position = posObjList[index].transform.position;
+        tailObj.transform.localRotation = posObjList[index].transform.localRotation;
+
         bodyList.Add(pool.GetObject(posObjList[index - 1].transform, posObjList[index - 1].transform.position));
-        bodyList[index - 1].transform.rotation = posObjList[index - 1].transform.rotation;
+        bodyList[index - 1].transform.localRotation = Quaternion.Euler(0, 0, 0);
+
         //뱀의 길이가 최대가 되었을때 => 꼬리의 다음위치가 머리일때 뱀을 초기화 한다.
-        if(index >= posObjList.Count - 1)
+        if (index >= posObjList.Count - 1)
         {
             resetBaaam();
             return;
@@ -104,9 +107,11 @@ public class Baaaaaam : MonoBehaviour
         Debug.Log("최대 길이입니다.");
         for(int i = 0; i< bodyList.Count; i++)
         {
-            //bodyList[i].transform.rotation = Quaternion.identity;
+            bodyList[i].transform.rotation = Quaternion.identity;
             pool.ReturnObject(bodyList[i]);
         }
+        bodyList.Clear();
+        tailObj.transform.localRotation = posObjList[0].transform.localRotation;
         tailObj.transform.position = posObjList[0].transform.position;
         index = 1;
     }
