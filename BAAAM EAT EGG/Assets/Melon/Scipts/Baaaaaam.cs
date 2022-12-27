@@ -15,6 +15,8 @@ public class Baaaaaam : MonoBehaviour
     [SerializeField] float radian;
     [SerializeField] float speed;
     [SerializeField] int count;
+    [SerializeField] Color[] color;
+    [SerializeField] int colorNum;
     int index = 0;
     float NextY;
 
@@ -33,6 +35,7 @@ public class Baaaaaam : MonoBehaviour
     {
         startSet(count);
         tailSet();
+
     }
 
     // Update is called once per frame
@@ -62,6 +65,7 @@ public class Baaaaaam : MonoBehaviour
             {
                 GameObject obj = Instantiate(head, new Vector3(x, 0, y), Quaternion.identity);
                 obj.transform.SetParent(transform);
+                obj.GetComponent<Renderer>().material.color = color[colorNum];
                 continue;
             }
             //몸통 좌표 저장
@@ -82,6 +86,8 @@ public class Baaaaaam : MonoBehaviour
             {
                 tailObj = Instantiate(tail, posObjList[index].transform.position, Quaternion.identity);
                 tailObj.transform.SetParent(transform);
+                tailObj.GetComponent<Renderer>().material.color = color[colorNum];
+
             }
             index++;
             return;
@@ -93,6 +99,7 @@ public class Baaaaaam : MonoBehaviour
 
         bodyList.Add(pool.GetObject(posObjList[index - 1].transform, posObjList[index - 1].transform.position));
         bodyList[index - 1].transform.localRotation = Quaternion.Euler(0, 0, 0);
+        bodyList[index - 1].GetComponent<Renderer>().material.color = color[colorNum];
 
         //뱀의 길이가 최대가 되었을때 => 꼬리의 다음위치가 머리일때 뱀을 초기화 한다.
         if (index >= posObjList.Count - 1)
