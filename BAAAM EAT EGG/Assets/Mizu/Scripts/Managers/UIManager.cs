@@ -161,7 +161,7 @@ namespace Mizu
         public void SetEarnMoney(int earnedMoney)
         {
             _scoreAnim.SetTrigger(hashEarn);
-            _gotMoneyText.text = $"{earnedMoney}";
+            _gotMoneyText = GameManager.Inst.ScoreUIPool.GetObject().GetComponent<TMP_Text>();
 
             Money += earnedMoney;
             SetMoney();
