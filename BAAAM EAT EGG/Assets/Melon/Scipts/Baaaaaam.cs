@@ -67,7 +67,7 @@ public class Baaaaaam : MonoBehaviour
     }
 
 
-    void tailSet()
+    public void tailSet()
     {
         
         if(index == 0)
