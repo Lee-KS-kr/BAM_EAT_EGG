@@ -22,9 +22,9 @@ namespace Mizu
 
         [Header("Scores")]
         [SerializeField] private TMP_Text _moneyText;
-        [SerializeField] private TMP_Text _gotMoneyText;
-        [SerializeField] private Animator _scoreAnim;
-        private int hashEarn = Animator.StringToHash("earned");
+        //[SerializeField] private TMP_Text _gotMoneyText;
+        //[SerializeField] private Animator _scoreAnim;
+        //private int hashEarn = Animator.StringToHash("earned");
 
         public int Money { get; private set; } = 0;
 
@@ -69,7 +69,7 @@ namespace Mizu
             _lengthUpgradeBtn.onClick.AddListener(LengthUpgrade);
             _incomeUpgradeBtn.onClick.AddListener(IncomeUpgrade);
 
-            _gotMoneyText.gameObject.SetActive(false);
+            //_gotMoneyText.gameObject.SetActive(false);
         }
 
         private void SetUpgradeLevels()
@@ -160,8 +160,8 @@ namespace Mizu
 
         public void SetEarnMoney(int earnedMoney)
         {
-            _scoreAnim.SetTrigger(hashEarn);
-            _gotMoneyText = GameManager.Inst.ScoreUIPool.GetObject().GetComponent<TMP_Text>();
+            //_scoreAnim.SetTrigger(hashEarn);
+            //_gotMoneyText = GameManager.Inst.ScoreUIPool.GetObject().GetComponent<TMP_Text>();
 
             Money += earnedMoney;
             SetMoney();
