@@ -2952,6 +2952,8 @@ MonoBehaviour:
   - {fileID: 6641368625501347718}
   - {fileID: 3977123159171411867}
   - {fileID: 6314910262664620475}
+  _egg: {fileID: 811952757148216335, guid: ff80e848537de4762b71bf18f3941133, type: 3}
+  _tail: {fileID: 0}
 --- !u!114 &1936488761
 MonoBehaviour:
   m_ObjectHideFlags: 0

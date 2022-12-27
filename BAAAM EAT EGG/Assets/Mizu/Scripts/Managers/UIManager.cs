@@ -45,17 +45,17 @@ namespace Mizu
 
         private void Update()
         {
-            if (Money < levStruct.costs[_speedLev - 1])
+            if (Money < levStruct.costs[_speedLev - 1] || _speedLev == levStruct.levels[levStruct.levels.Length - 1])
                 _speedUpgradeBtn.interactable = false;
             else
                 _speedUpgradeBtn.interactable = true;
 
-            if (Money < levStruct.costs[_lengthLev - 1])
+            if (Money < levStruct.costs[_lengthLev - 1]|| _lengthLev == levStruct.levels[levStruct.levels.Length - 1])
                 _lengthUpgradeBtn.interactable = false;
             else
                 _lengthUpgradeBtn.interactable = true;
 
-            if (Money < levStruct.costs[_incomeLev - 1])
+            if (Money < levStruct.costs[_incomeLev - 1]|| _incomeLev == levStruct.levels[levStruct.levels.Length - 1])
                 _incomeUpgradeBtn.interactable = false;
             else
                 _incomeUpgradeBtn.interactable = true;
@@ -94,7 +94,7 @@ namespace Mizu
 
         private void SpeedUpgrade()
         {
-            GameManager.Inst.BamMng.SetBamSpeed();
+            GameManager.Inst.BamMng.SetSpeed();
             Debug.Log(_speedUpgradeBtn.gameObject.name);
 
             MoneyUse(levStruct.costs[_speedLev - 1]);
@@ -131,6 +131,7 @@ namespace Mizu
 
         private void IncomeUpgrade()
         {
+            GameManager.Inst.BamMng.SetEggPrice();
             Debug.Log(_incomeUpgradeBtn.gameObject.name);
 
             MoneyUse(levStruct.costs[_incomeLev - 1]);
