@@ -11,7 +11,7 @@ namespace Mizu
     {
         [Header("Settings")]
         [SerializeField] private Button _settingsButton;
-        
+
         [Header("Upgrades")]
         [SerializeField] private Button _speedUpgradeBtn;
         [SerializeField] private Button _lengthUpgradeBtn;
@@ -23,6 +23,8 @@ namespace Mizu
         [Header("Scores")]
         [SerializeField] private TMP_Text _moneyText;
         [SerializeField] private TMP_Text _gotMoneyText;
+        [SerializeField] private Animator _scoreAnim;
+        private int hashEarn = Animator.StringToHash("earned");
 
         public int Money { get; private set; } = 0;
 
@@ -40,11 +42,29 @@ namespace Mizu
 
             SetMoney();
         }
-        
+
+        private void Update()
+        {
+            if (Money < levStruct.costs[_speedLev - 1])
+                _speedUpgradeBtn.interactable = false;
+            else
+                _speedUpgradeBtn.interactable = true;
+
+            if (Money < levStruct.costs[_lengthLev - 1])
+                _lengthUpgradeBtn.interactable = false;
+            else
+                _lengthUpgradeBtn.interactable = true;
+
+            if (Money < levStruct.costs[_incomeLev - 1])
+                _incomeUpgradeBtn.interactable = false;
+            else
+                _incomeUpgradeBtn.interactable = true;
+        }
+
         private void Initialize()
         {
             _settingsButton.onClick.AddListener(OnSettingsButton);
-            
+
             _speedUpgradeBtn.onClick.AddListener(SpeedUpgrade);
             _lengthUpgradeBtn.onClick.AddListener(LengthUpgrade);
             _incomeUpgradeBtn.onClick.AddListener(IncomeUpgrade);
@@ -69,34 +89,61 @@ namespace Mizu
         private void OnSettingsButton()
         {
             Debug.Log("Settings");
+            SetEarnMoney(1000);
         }
 
         private void SpeedUpgrade()
         {
+            GameManager.Inst.BamMng.SetBamSpeed();
             Debug.Log(_speedUpgradeBtn.gameObject.name);
+
             MoneyUse(levStruct.costs[_speedLev - 1]);
-            _speedUpgradeCost.text = $"{levStruct.costs[_speedLev]}";
             _speedLev = levStruct.levels[_speedLev];
 
-            GameManager.Inst.BamMng.SetBamSpeed();
+            if (_speedLev == levStruct.levels[levStruct.levels.Length - 1])
+            {
+                _speedUpgradeCost.text = $"Full";
+                _speedUpgradeBtn.interactable = false;
+                return;
+            }
+
+            _speedUpgradeCost.text = $"{levStruct.costs[_speedLev - 1]}";
         }
 
         private void LengthUpgrade()
         {
+            GameManager.Inst.BamMng.SetBamLength();
             Debug.Log(_lengthUpgradeBtn.gameObject.name);
+
             MoneyUse(levStruct.costs[_lengthLev - 1]);
-            _lengthUpgradeCost.text = $"{levStruct.costs[_lengthLev]}";
             _lengthLev = levStruct.levels[_lengthLev];
 
-            GameManager.Inst.BamMng.SetBamLength();
+            if (_lengthLev == levStruct.levels[levStruct.levels.Length - 1])
+            {
+                _lengthUpgradeCost.text = $"Full";
+                _lengthUpgradeBtn.interactable = false;
+                return;
+            }
+
+            _lengthUpgradeCost.text = $"{levStruct.costs[_lengthLev - 1]}";
+
         }
 
         private void IncomeUpgrade()
         {
             Debug.Log(_incomeUpgradeBtn.gameObject.name);
+
             MoneyUse(levStruct.costs[_incomeLev - 1]);
-            _incomeUpgradeCost.text = $"{levStruct.costs[_incomeLev]}";
             _incomeLev = levStruct.levels[_incomeLev];
+
+            if (_incomeLev == levStruct.levels[levStruct.levels.Length - 1])
+            {
+                _incomeUpgradeCost.text = $"Full";
+                _incomeUpgradeBtn.interactable = false;
+                return;
+            }
+
+            _incomeUpgradeCost.text = $"{levStruct.costs[_incomeLev - 1]}";
         }
 
         private void SetMoney()
@@ -112,10 +159,9 @@ namespace Mizu
 
         public void SetEarnMoney(int earnedMoney)
         {
-            _gotMoneyText.gameObject.SetActive(true);
+            _scoreAnim.SetTrigger(hashEarn);
             _gotMoneyText.text = $"{earnedMoney}";
-            Debug.Log(earnedMoney);
-            
+
             Money += earnedMoney;
             SetMoney();
         }

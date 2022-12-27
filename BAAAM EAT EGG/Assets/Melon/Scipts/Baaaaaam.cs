@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mizu;
-
+using System;
 
 public class Baaaaaam : MonoBehaviour
 {
@@ -18,6 +18,8 @@ public class Baaaaaam : MonoBehaviour
     int index = 0;
     float NextY;
 
+
+    public Action<Baaaaaam> headTailAction;
 
     public float BaaamSpeed { get => speed; }
     public int BaaamCount { get => count; }
@@ -57,12 +59,12 @@ public class Baaaaaam : MonoBehaviour
             //첫번째 경우 머리 생성
             if(i == 0)
             {
-                GameObject obj = Instantiate(head, new Vector3(x, 4, y), Quaternion.identity);
+                GameObject obj = Instantiate(head, new Vector3(x, 0, y), Quaternion.identity);
                 obj.transform.SetParent(transform);
                 continue;
             }
             //몸통 좌표 저장
-            GameObject eObj = Instantiate(emptyObj, new Vector3(x, 4, y), Quaternion.Euler(0,Mathf.Rad2Deg * rad, 0));
+            GameObject eObj = Instantiate(emptyObj, new Vector3(x, 0, y), Quaternion.Euler(0,Mathf.Rad2Deg * rad, 0));
             eObj.transform.SetParent(transform);
             posObjList.Add(eObj);
         }
@@ -104,6 +106,8 @@ public class Baaaaaam : MonoBehaviour
     //최대 길이가 되었을때 모든 몸을 반환하고 꼬리를 다시 머리 뒤로 이동
     void resetBaaam()
     {
+        headTailAction?.Invoke(this);
+
         Debug.Log("최대 길이입니다.");
         for(int i = 0; i< bodyList.Count; i++)
         {
