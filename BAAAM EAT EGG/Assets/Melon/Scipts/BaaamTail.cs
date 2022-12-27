@@ -39,7 +39,7 @@ public class BaaamTail : MonoBehaviour
         while(true)
         {
             pool.GetObject(null, transform.position);
-            yield return time;
+            yield return new WaitForSeconds(spawnSpeed);
         }
     }
 }
