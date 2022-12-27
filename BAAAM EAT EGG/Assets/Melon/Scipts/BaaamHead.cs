@@ -14,6 +14,7 @@ public class BaaamHead : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pool = GameObject.Find("EggPool").GetComponent<ObjectPool>();
         EggLayer = LayerMask.NameToLayer("Egg");
     }
 
@@ -24,9 +25,8 @@ public class BaaamHead : MonoBehaviour
         {
             //충돌 확인용 임시코드
             egg = other.GetComponent<Egg>();
-            Debug.Log("알에 충돌했습니다. 알의 가치 : " + egg.GetPrice());
             GameManager.Inst.UIMng.SetEarnMoney(egg.GetPrice());
-            other.gameObject.SetActive(false);
+            pool.ReturnObject(other.gameObject);
             //////////////////
         }
     }

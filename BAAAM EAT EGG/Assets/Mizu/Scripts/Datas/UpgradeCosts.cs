@@ -15,8 +15,8 @@ public class UpgradeCosts
 
     public string SetUpgradeCost()
     {
-        LevelStruct levStruct = new LevelStruct() { levels = new int[11] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-            costs = new int[11] { 100, 250, 400, 750, 1000, 1500, 2000, 3000, 5000, 10000, 0 } };
+        LevelStruct levStruct = new LevelStruct() { levels = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+            costs = new int[] { 100, 250, 400, 750, 1000, 1500, 2000, 3000, 5000, 10000, 0 } };
 
         return JsonUtility.ToJson(levStruct);
     }

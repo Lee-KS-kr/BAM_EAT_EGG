@@ -45,7 +45,7 @@ namespace Mizu
 
         public void SetSpeed()
         {
-            _tail.setSpawnSpeed(0.3f);
+            _tail.setSpawnSpeed(0.1f);
         }
 
         public void SetEggPrice()
