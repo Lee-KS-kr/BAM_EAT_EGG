@@ -45,7 +45,6 @@ namespace Mizu
 
         public void SetSpeed()
         {
-            Debug.Log($"To do : BamManager SetBamSpeed");
             _tail.setSpawnSpeed(0.3f);
         }
 

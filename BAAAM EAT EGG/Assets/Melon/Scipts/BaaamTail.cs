@@ -7,7 +7,7 @@ public class BaaamTail : MonoBehaviour
 {
     [SerializeField] GameObject poolObj;
     [SerializeField] ObjectPool pool;
-    float spawnSpeed;
+    static float spawnSpeed;
     WaitForSeconds time;
 
 
@@ -20,7 +20,8 @@ public class BaaamTail : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        setSpawnSpeed(2);
+        spawnSpeed = 2;
+        time = new WaitForSeconds(spawnSpeed);
         StartCoroutine(spawnEgg());
     }
 
@@ -28,6 +29,7 @@ public class BaaamTail : MonoBehaviour
     public void setSpawnSpeed(float speed)
     {
         spawnSpeed -= speed;
+        Debug.Log($"new spawn time {spawnSpeed}");
         time = new WaitForSeconds(spawnSpeed);
     }
 
