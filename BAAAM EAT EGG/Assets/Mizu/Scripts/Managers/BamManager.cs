@@ -31,11 +31,21 @@ namespace Mizu
         public void SetBamLength()
         {
             Debug.Log($"To do : BamManager SetBamLength");
+            _bams[0].tailSet();
+
+            // bams[0]의 인덱스와 카운트를 확인하여 동일하면 전부 끄고 다음으로 이동
         }
 
         public void SetBamSpeed()
         {
             Debug.Log($"To do : BamManager SetBamSpeed");
+        }
+
+        private void SetNextLevel()
+        {
+            _bams[_level].gameObject.SetActive(true);
+            _rails[_level].SetActive(true);
+            _level++;
         }
     }
 }
