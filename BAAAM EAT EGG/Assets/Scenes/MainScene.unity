@@ -173,9 +173,9 @@ MonoBehaviour:
   head: {fileID: 6000537308436138254, guid: 95e5c9a8d73b54a35ad564a518c44dc7, type: 3}
   tail: {fileID: 1797567619604663602, guid: 7a11e5bd8c7284ce5b157ddb55870174, type: 3}
   emptyObj: {fileID: 89840460948360363, guid: 3403fff909c1047fb83bd521b42ab84a, type: 3}
-  radian: 0.5
+  radian: 3
   speed: -180
-  count: 10
+  count: 60
 --- !u!1 &143667507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,9 +1033,9 @@ MonoBehaviour:
   head: {fileID: 6000537308436138254, guid: 95e5c9a8d73b54a35ad564a518c44dc7, type: 3}
   tail: {fileID: 1797567619604663602, guid: 7a11e5bd8c7284ce5b157ddb55870174, type: 3}
   emptyObj: {fileID: 89840460948360363, guid: 3403fff909c1047fb83bd521b42ab84a, type: 3}
-  radian: 0.5
+  radian: 1.5
   speed: -180
-  count: 10
+  count: 30
 --- !u!1 &686341640
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,9 +1086,9 @@ MonoBehaviour:
   head: {fileID: 6000537308436138254, guid: 95e5c9a8d73b54a35ad564a518c44dc7, type: 3}
   tail: {fileID: 1797567619604663602, guid: 7a11e5bd8c7284ce5b157ddb55870174, type: 3}
   emptyObj: {fileID: 89840460948360363, guid: 3403fff909c1047fb83bd521b42ab84a, type: 3}
-  radian: 0.5
+  radian: 1
   speed: -180
-  count: 10
+  count: 20
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -3064,9 +3064,9 @@ MonoBehaviour:
   head: {fileID: 6000537308436138254, guid: 95e5c9a8d73b54a35ad564a518c44dc7, type: 3}
   tail: {fileID: 1797567619604663602, guid: 7a11e5bd8c7284ce5b157ddb55870174, type: 3}
   emptyObj: {fileID: 89840460948360363, guid: 3403fff909c1047fb83bd521b42ab84a, type: 3}
-  radian: 0.5
+  radian: 2.5
   speed: -180
-  count: 10
+  count: 50
 --- !u!1 &2090686240
 GameObject:
   m_ObjectHideFlags: 0
@@ -3298,9 +3298,9 @@ MonoBehaviour:
   head: {fileID: 6000537308436138254, guid: 95e5c9a8d73b54a35ad564a518c44dc7, type: 3}
   tail: {fileID: 1797567619604663602, guid: 7a11e5bd8c7284ce5b157ddb55870174, type: 3}
   emptyObj: {fileID: 89840460948360363, guid: 3403fff909c1047fb83bd521b42ab84a, type: 3}
-  radian: 0.5
+  radian: 2
   speed: -180
-  count: 10
+  count: 40
 --- !u!1001 &2071969020349198884
 PrefabInstance:
   m_ObjectHideFlags: 0
