@@ -27,7 +27,7 @@ public class BaaamTail : MonoBehaviour
     //알 스폰시간 변경 함수
     public void setSpawnSpeed(float speed)
     {
-        spawnSpeed = speed;
+        spawnSpeed -= speed;
         time = new WaitForSeconds(spawnSpeed);
     }
 
