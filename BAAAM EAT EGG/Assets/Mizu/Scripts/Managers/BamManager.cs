@@ -10,6 +10,9 @@ namespace Mizu
         [SerializeField] private Baaaaaam[] _bams;
         [SerializeField] private GameObject[] _rails;
 
+        [SerializeField] private Egg _egg;
+        [SerializeField] private BaaamTail _tail;
+
         private static int _level = 0;
         private int _index = 0;
 
@@ -37,13 +40,17 @@ namespace Mizu
 
         public void SetBamLength()
         {
-            Debug.Log($"To do : BamManager SetBamLength");
             _bams[0].tailSet();
         }
 
-        public void SetBamSpeed()
+        public void SetSpeed()
         {
-            Debug.Log($"To do : BamManager SetBamSpeed");
+            _tail.setSpawnSpeed(0.3f);
+        }
+
+        public void SetEggPrice()
+        {
+            _egg.SetPrice(1.5f);
         }
 
         private void SetNextLevel(Baaaaaam bam)
