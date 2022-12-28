@@ -24,7 +24,7 @@ namespace Mizu
             {
                 var obj = Instantiate(bamObject);
                 obj.SetActive(false);
-                obj.transform.parent = transform;
+                obj.transform.SetParent(transform);
                 obj.transform.position = transform.position;
 
                 objectPool.Enqueue(obj);
@@ -48,7 +48,7 @@ namespace Mizu
             if (poolCount < 1) ExpandPool();
 
             var obj = objectPool.Dequeue();
-            obj.transform.parent = newParent;
+            obj.transform.SetParent(newParent);
             obj.transform.position = newPos;
             obj.transform.rotation = Quaternion.Euler(0, 0, 0);
             obj.SetActive(true);
@@ -71,7 +71,7 @@ namespace Mizu
         public void ReturnObject(GameObject obj)
         {
             obj.SetActive(false);
-            obj.transform.parent = transform;
+            obj.transform.SetParent(transform);
             obj.transform.position = transform.position;
             obj.transform.rotation = Quaternion.Euler(0, 0, 0);
             objectPool.Enqueue(obj);
