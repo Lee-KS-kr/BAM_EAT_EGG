@@ -50,7 +50,7 @@ namespace Mizu
             else
                 _speedUpgradeBtn.interactable = true;
 
-            if (Money < levStruct.costs[_lengthLev - 1]|| _lengthLev == levStruct.levels[levStruct.levels.Length - 1])
+            if (Money < levStruct.costs[_lengthLev - 1])
                 _lengthUpgradeBtn.interactable = false;
             else
                 _lengthUpgradeBtn.interactable = true;
@@ -75,6 +75,7 @@ namespace Mizu
         private void SetUpgradeLevels()
         {
             UpgradeCosts cost = new UpgradeCosts();
+            cost.GetDefaultStruct();
             var temp = cost.SetUpgradeCost();
             levStruct = cost.GetUpgrades(temp);
 
@@ -89,7 +90,7 @@ namespace Mizu
         private void OnSettingsButton()
         {
             Debug.Log("Settings");
-            SetEarnMoney(1000);
+            SetEarnMoney(100000);
         }
 
         private void SpeedUpgrade()
@@ -120,8 +121,9 @@ namespace Mizu
 
             if (_lengthLev == levStruct.levels[levStruct.levels.Length - 1])
             {
-                _lengthUpgradeCost.text = $"Full";
-                _lengthUpgradeBtn.interactable = false;
+                //_lengthUpgradeCost.text = $"Full";
+                //_lengthUpgradeBtn.interactable = false;
+                _lengthLev = levStruct.levels[_lengthLev - 2];
                 return;
             }
 
