@@ -29,7 +29,8 @@ public class UpgradeCosts
 
         for(int i = 0; i < levelCount; i++)
         {
-
+            levStruct.levels[i] = 1 + i;
+            levStruct.costs[i] = (1 + i) * costInterval;
         }
     }
 

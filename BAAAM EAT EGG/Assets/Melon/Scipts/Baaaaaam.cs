@@ -17,6 +17,7 @@ public class Baaaaaam : MonoBehaviour
     [SerializeField] int count;
     [SerializeField] Color[] color;
     [SerializeField] int colorNum;
+    [SerializeField] int price;
     int index = 0;
     float NextY;
 
@@ -66,6 +67,7 @@ public class Baaaaaam : MonoBehaviour
                 GameObject obj = Instantiate(head, new Vector3(x, 0, y), Quaternion.identity);
                 obj.transform.SetParent(transform);
                 obj.GetComponent<Renderer>().material.color = color[colorNum];
+                obj.GetComponent<BaaamHead>().SetPrice(price);
                 continue;
             }
             //몸통 좌표 저장

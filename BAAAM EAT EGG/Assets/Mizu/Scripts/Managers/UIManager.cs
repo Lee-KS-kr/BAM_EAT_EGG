@@ -22,9 +22,10 @@ namespace Mizu
 
         [Header("Scores")]
         [SerializeField] private TMP_Text _moneyText;
-        //[SerializeField] private TMP_Text _gotMoneyText;
+        private GameObject _scoreObj;
+        private TMP_Text _gotMoneyText;
         //[SerializeField] private Animator _scoreAnim;
-        //private int hashEarn = Animator.StringToHash("earned");
+        private WaitForSeconds waitTime = new WaitForSeconds(1.5f);
 
         public int Money { get; private set; } = 0;
 
@@ -32,6 +33,11 @@ namespace Mizu
         [SerializeField] private int _speedLev = 0;
         [SerializeField] private int _lengthLev = 0;
         [SerializeField] private int _incomeLev = 0;
+
+
+        private Vector2 inputPos;
+        private float elapsedTime;
+        private float benchmarkTime = 1f;
 
         LevelStruct levStruct = new LevelStruct();
 
@@ -45,6 +51,8 @@ namespace Mizu
 
         private void Update()
         {
+            OnHold();
+
             if (Money < levStruct.costs[_speedLev - 1] || _speedLev == levStruct.levels[levStruct.levels.Length - 1])
                 _speedUpgradeBtn.interactable = false;
             else
@@ -68,14 +76,12 @@ namespace Mizu
             _speedUpgradeBtn.onClick.AddListener(SpeedUpgrade);
             _lengthUpgradeBtn.onClick.AddListener(LengthUpgrade);
             _incomeUpgradeBtn.onClick.AddListener(IncomeUpgrade);
-
-            //_gotMoneyText.gameObject.SetActive(false);
         }
 
         private void SetUpgradeLevels()
         {
             UpgradeCosts cost = new UpgradeCosts();
-            cost.GetDefaultStruct();
+            cost.SetCustomStrcut(11, 100);
             var temp = cost.SetUpgradeCost();
             levStruct = cost.GetUpgrades(temp);
 
@@ -85,6 +91,36 @@ namespace Mizu
             _lengthLev = levStruct.levels[0];
             _incomeUpgradeCost.text = $"{levStruct.costs[_incomeLev]}";
             _incomeLev = levStruct.levels[0];
+        }
+
+        private void OnHold()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                inputPos = Input.mousePosition;
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                elapsedTime += Time.deltaTime;
+
+                if(elapsedTime >= benchmarkTime)
+                {
+                    if (Money >= levStruct.costs[_lengthLev - 1])
+                    {
+                        elapsedTime -= (Time.deltaTime * 20);
+                        LengthUpgrade();
+                    }
+                    else
+                        return;
+                }
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                elapsedTime = 0f;
+                inputPos = Vector2.zero;
+            }
         }
 
         private void OnSettingsButton()
@@ -121,8 +157,6 @@ namespace Mizu
 
             if (_lengthLev == levStruct.levels[levStruct.levels.Length - 1])
             {
-                //_lengthUpgradeCost.text = $"Full";
-                //_lengthUpgradeBtn.interactable = false;
                 _lengthLev = levStruct.levels[_lengthLev - 2];
                 return;
             }
@@ -162,11 +196,21 @@ namespace Mizu
 
         public void SetEarnMoney(int earnedMoney)
         {
-            //_scoreAnim.SetTrigger(hashEarn);
-            //_gotMoneyText = GameManager.Inst.ScoreUIPool.GetObject().GetComponent<TMP_Text>();
+            _scoreObj = GameManager.Inst.ScoreUIPool.GetObject(GameManager.Inst.ScoreUIPool.transform, Vector2.zero);
+            StartCoroutine(MoneyEffect(_scoreObj));
+
+            _scoreObj.transform.rotation = Quaternion.Euler(90, 0, 0);
+            _gotMoneyText = _scoreObj.GetComponentInChildren<TMP_Text>();
+            _gotMoneyText.text = $"{earnedMoney}";
 
             Money += earnedMoney;
             SetMoney();
+        }
+
+        private IEnumerator MoneyEffect(GameObject scoreObj)
+        {
+            yield return waitTime;
+            GameManager.Inst.ScoreUIPool.ReturnObject(scoreObj);
         }
     }
 }
