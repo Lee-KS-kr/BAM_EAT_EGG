@@ -12,12 +12,29 @@ public struct LevelStruct
 
 public class UpgradeCosts
 {
+    LevelStruct levStruct;
+
+    public void GetDefaultStruct()
+    {
+        levStruct = new LevelStruct()
+        {
+            levels = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+            costs = new int[] { 100, 250, 400, 750, 1000, 1500, 2000, 3000, 5000, 10000, 0 }
+        };
+    }
+
+    public void SetCustomStrcut(int levelCount, int costInterval)
+    {
+        levStruct = new LevelStruct() { levels = new int[levelCount], costs = new int[levelCount] };
+
+        for(int i = 0; i < levelCount; i++)
+        {
+
+        }
+    }
 
     public string SetUpgradeCost()
     {
-        LevelStruct levStruct = new LevelStruct() { levels = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-            costs = new int[] { 100, 250, 400, 750, 1000, 1500, 2000, 3000, 5000, 10000, 0 } };
-
         return JsonUtility.ToJson(levStruct);
     }
 
