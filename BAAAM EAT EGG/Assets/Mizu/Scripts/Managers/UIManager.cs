@@ -196,10 +196,10 @@ namespace Mizu
 
         public void SetEarnMoney(int earnedMoney)
         {
-            _scoreObj = GameManager.Inst.ScoreUIPool.GetObject(GameManager.Inst.ScoreUIPool.transform, Vector2.zero);
+            _scoreObj = GameManager.Inst.ScoreUIPool.GetObject();
             StartCoroutine(MoneyEffect(_scoreObj));
 
-            _scoreObj.transform.rotation = Quaternion.Euler(90, 0, 0);
+            _scoreObj.transform.rotation = Quaternion.Euler(76, 0, 0);
             _gotMoneyText = _scoreObj.GetComponentInChildren<TMP_Text>();
             _gotMoneyText.text = $"{earnedMoney}";
 
