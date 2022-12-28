@@ -9,6 +9,7 @@ public class GameSpeedUp : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            StopAllCoroutines();
             StartCoroutine(speedUp());
         }
     }
@@ -16,8 +17,10 @@ public class GameSpeedUp : MonoBehaviour
 
     IEnumerator speedUp()
     {
-        Time.timeScale = 2;
+        Time.timeScale = 5;
+
         yield return new WaitForSeconds(2f);
+
         Time.timeScale = 1;
     }
 }
