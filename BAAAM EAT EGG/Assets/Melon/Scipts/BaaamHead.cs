@@ -7,7 +7,7 @@ public class BaaamHead : MonoBehaviour
 {
     ObjectPool pool;
     int EggLayer;
-
+    int AddPrice;
     //임시
     Egg egg;
 
@@ -18,14 +18,17 @@ public class BaaamHead : MonoBehaviour
         EggLayer = LayerMask.NameToLayer("Egg");
     }
 
-
+    public void SetPrice(int price)
+    {
+        AddPrice = price;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == EggLayer)
         {
             //충돌 확인용 임시코드
             egg = other.GetComponent<Egg>();
-            GameManager.Inst.UIMng.SetEarnMoney(egg.GetPrice());
+            GameManager.Inst.UIMng.SetEarnMoney(egg.GetPrice() * AddPrice);
             pool.ReturnObject(other.gameObject);
             //////////////////
         }

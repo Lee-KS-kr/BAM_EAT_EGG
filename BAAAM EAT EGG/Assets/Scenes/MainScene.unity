@@ -184,6 +184,7 @@ MonoBehaviour:
   - {r: 0.99215686, g: 0.20392157, b: 0.89411765, a: 0}
   - {r: 0.99215686, g: 0.20392157, b: 0.21176471, a: 0}
   colorNum: 5
+  price: 10
 --- !u!1 &143667507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1042,7 @@ MonoBehaviour:
   - {r: 0.99215686, g: 0.20392157, b: 0.89411765, a: 0}
   - {r: 0.99215686, g: 0.20392157, b: 0.21176471, a: 0}
   colorNum: 2
+  price: 4
 --- !u!1 &633312622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,6 +1148,7 @@ MonoBehaviour:
   - {r: 0.99215686, g: 0.20392157, b: 0.89411765, a: 0}
   - {r: 0.99215686, g: 0.20392157, b: 0.21176471, a: 0}
   colorNum: 1
+  price: 2
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2333,6 +2336,7 @@ MonoBehaviour:
   - {r: 0.99215686, g: 0.20392157, b: 0.89411765, a: 0}
   - {r: 0.99215686, g: 0.20392157, b: 0.21176471, a: 0}
   colorNum: 0
+  price: 1
 --- !u!1 &1391044870
 GameObject:
   m_ObjectHideFlags: 0
@@ -3135,6 +3139,7 @@ MonoBehaviour:
   - {r: 0.99215686, g: 0.20392157, b: 0.89411765, a: 0}
   - {r: 0.99215686, g: 0.20392157, b: 0.21176471, a: 0}
   colorNum: 4
+  price: 8
 --- !u!1 &2090686240
 GameObject:
   m_ObjectHideFlags: 0
@@ -3376,6 +3381,7 @@ MonoBehaviour:
   - {r: 0.99215686, g: 0.20392157, b: 0.89411765, a: 0}
   - {r: 0.99215686, g: 0.20392157, b: 0.21176471, a: 0}
   colorNum: 3
+  price: 6
 --- !u!1001 &2071969020349198884
 PrefabInstance:
   m_ObjectHideFlags: 0
