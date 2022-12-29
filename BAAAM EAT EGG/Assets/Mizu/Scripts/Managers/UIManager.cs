@@ -24,19 +24,16 @@ namespace Mizu
         [SerializeField] private TMP_Text _moneyText;
         private GameObject _scoreObj;
         private TMP_Text _gotMoneyText;
-        //[SerializeField] private Animator _scoreAnim;
-        private WaitForSeconds waitTime = new WaitForSeconds(1.5f);
         private WaitForSecondsRealtime realtimeWait = new WaitForSecondsRealtime(1.5f);
 
-        public int Money { get; private set; } = 0;
+        public int Money { get; private set; } = 10000;
 
-        [Header("Upgrades")]
+        [Header("Upgrades leves")]
         [SerializeField] private int _speedLev = 0;
         [SerializeField] private int _lengthLev = 0;
         [SerializeField] private int _incomeLev = 0;
+        [SerializeField] private GameObject _onboarding;
 
-
-        private Vector2 inputPos;
         private float elapsedTime;
         private float benchmarkTime = 1f;
 
@@ -96,11 +93,6 @@ namespace Mizu
 
         private void OnHold()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                inputPos = Input.mousePosition;
-            }
-
             if (Input.GetMouseButton(0))
             {
                 elapsedTime += Time.deltaTime;
@@ -120,7 +112,9 @@ namespace Mizu
             if (Input.GetMouseButtonUp(0))
             {
                 elapsedTime = 0f;
-                inputPos = Vector2.zero;
+
+                if (_onboarding.activeInHierarchy)
+                    _onboarding.SetActive(false);
             }
         }
 
@@ -133,7 +127,6 @@ namespace Mizu
         private void SpeedUpgrade()
         {
             GameManager.Inst.BamMng.SetSpeed();
-            Debug.Log(_speedUpgradeBtn.gameObject.name);
 
             MoneyUse(levStruct.costs[_speedLev - 1]);
             _speedLev = levStruct.levels[_speedLev];
@@ -151,7 +144,6 @@ namespace Mizu
         private void LengthUpgrade()
         {
             GameManager.Inst.BamMng.SetBamLength();
-            Debug.Log(_lengthUpgradeBtn.gameObject.name);
 
             MoneyUse(levStruct.costs[_lengthLev - 1]);
             _lengthLev = levStruct.levels[_lengthLev];
@@ -169,7 +161,6 @@ namespace Mizu
         private void IncomeUpgrade()
         {
             GameManager.Inst.BamMng.SetEggPrice();
-            Debug.Log(_incomeUpgradeBtn.gameObject.name);
 
             MoneyUse(levStruct.costs[_incomeLev - 1]);
             _incomeLev = levStruct.levels[_incomeLev];
