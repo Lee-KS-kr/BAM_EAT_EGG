@@ -60,7 +60,7 @@ namespace Mizu
             // 몇번째 뱀에게서 온 신호인지를 확인한다.
             _index = 0;
 
-            for(int i = 0; i < _bams.Length; i++)
+            for (int i = 0; i < _bams.Length; i++)
             {
                 if (IEqualityComparer<Baaaaaam>.ReferenceEquals(_bams[i], bam))
                     _index = i;
@@ -88,7 +88,7 @@ namespace Mizu
         public IEnumerator offUpgradeText()
         {
             upgradeText.SetActive(true);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSecondsRealtime(2f);
             upgradeText.SetActive(false);
         }
 
