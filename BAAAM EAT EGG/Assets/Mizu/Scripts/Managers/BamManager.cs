@@ -7,6 +7,7 @@ namespace Mizu
 {
     public class BamManager : MonoBehaviour
     {
+        [SerializeField] private CameraZoom _camera;
         [SerializeField] private Baaaaaam[] _bams;
         [SerializeField] private GameObject[] _rails;
 
@@ -67,6 +68,9 @@ namespace Mizu
             // 신호가 마지막 뱀에게서 왔으면 레벨을 추가한다
             if (_index == _level - 1)
             {
+                if (_level == _bams.Length + 1) return;
+
+                _camera.SetCameraSize();
                 _bams[_level].gameObject.SetActive(true);
                 _rails[_level].SetActive(true);
                 _level++;
