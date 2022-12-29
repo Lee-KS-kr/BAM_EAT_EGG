@@ -86,7 +86,7 @@ public class Baaaaaam : MonoBehaviour
             //꼬리를 생성하지 않았다면 꼬리를 먼저 생성
             if (tailObj == null)
             {
-                tailObj = Instantiate(tail, posObjList[index].transform.position, Quaternion.identity);
+                tailObj = Instantiate(tail, posObjList[index].transform.position, posObjList.Count < 10 ? Quaternion.Euler(0,30,0) : Quaternion.identity);
                 tailObj.transform.SetParent(transform);
                 tailObj.GetComponent<Renderer>().material.color = color[colorNum];
 
@@ -96,6 +96,7 @@ public class Baaaaaam : MonoBehaviour
         }
 
         //body pool에서 몸통을 꺼내와 사용
+        tailObj.transform.rotation = Quaternion.identity;
         tailObj.transform.position = posObjList[index].transform.position;
         tailObj.transform.localRotation = posObjList[index].transform.localRotation;
 
