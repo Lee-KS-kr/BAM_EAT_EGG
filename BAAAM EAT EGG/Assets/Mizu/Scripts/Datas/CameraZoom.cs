@@ -39,7 +39,6 @@ namespace Mizu
         public void SetCameraSize()
         {
             index++;
-            _camera.orthographicSize = cameraSize[index];
             isChanging = true;
         }
     }
