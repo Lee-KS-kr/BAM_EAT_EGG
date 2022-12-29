@@ -26,6 +26,7 @@ namespace Mizu
         private TMP_Text _gotMoneyText;
         //[SerializeField] private Animator _scoreAnim;
         private WaitForSeconds waitTime = new WaitForSeconds(1.5f);
+        private WaitForSecondsRealtime realtimeWait = new WaitForSecondsRealtime(1.5f);
 
         public int Money { get; private set; } = 0;
 
@@ -63,7 +64,7 @@ namespace Mizu
             else
                 _lengthUpgradeBtn.interactable = true;
 
-            if (Money < levStruct.costs[_incomeLev - 1]|| _incomeLev == levStruct.levels[levStruct.levels.Length - 1])
+            if (Money < levStruct.costs[_incomeLev - 1] || _incomeLev == levStruct.levels[levStruct.levels.Length - 1])
                 _incomeUpgradeBtn.interactable = false;
             else
                 _incomeUpgradeBtn.interactable = true;
@@ -104,11 +105,11 @@ namespace Mizu
             {
                 elapsedTime += Time.deltaTime;
 
-                if(elapsedTime >= benchmarkTime)
+                if (elapsedTime >= benchmarkTime)
                 {
                     if (Money >= levStruct.costs[_lengthLev - 1])
                     {
-                        elapsedTime -= (Time.deltaTime * 20);
+                        elapsedTime -= (Time.deltaTime * 10);
                         LengthUpgrade();
                     }
                     else
@@ -209,7 +210,7 @@ namespace Mizu
 
         private IEnumerator MoneyEffect(GameObject scoreObj)
         {
-            yield return waitTime;
+            yield return realtimeWait;
             GameManager.Inst.ScoreUIPool.ReturnObject(scoreObj);
         }
     }
