@@ -13,6 +13,7 @@ namespace Mizu
 
         [SerializeField] private Egg _egg;
         [SerializeField] private BaaamTail _tail;
+        [SerializeField] private GameObject upgradeText;
 
         private static int _level = 0;
         private int _index = 0;
@@ -74,6 +75,7 @@ namespace Mizu
                 _bams[_level].gameObject.SetActive(true);
                 _rails[_level].SetActive(true);
                 _level++;
+                StartCoroutine(offUpgradeText());
             }
 
             // 신호가 이전 뱀에게서 왔으면 다음 뱀의 꼬리를 추가한다
@@ -82,5 +84,13 @@ namespace Mizu
                 _bams[_index + 1].tailSet();
             }
         }
+
+        public IEnumerator offUpgradeText()
+        {
+            upgradeText.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            upgradeText.SetActive(false);
+        }
+
     }
 }

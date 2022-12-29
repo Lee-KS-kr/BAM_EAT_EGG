@@ -1906,7 +1906,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &999638442
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3659,6 +3659,7 @@ MonoBehaviour:
   - {fileID: 6314910262664620475}
   _egg: {fileID: 811952757148216335, guid: ff80e848537de4762b71bf18f3941133, type: 3}
   _tail: {fileID: 6256353162243945956, guid: 7a11e5bd8c7284ce5b157ddb55870174, type: 3}
+  upgradeText: {fileID: 999638441}
 --- !u!114 &1936488761
 MonoBehaviour:
   m_ObjectHideFlags: 0
