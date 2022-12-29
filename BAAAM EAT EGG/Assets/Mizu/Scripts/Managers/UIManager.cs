@@ -26,6 +26,7 @@ namespace Mizu
         private TMP_Text _gotMoneyText;
         //[SerializeField] private Animator _scoreAnim;
         private WaitForSeconds waitTime = new WaitForSeconds(1.5f);
+        private WaitForSecondsRealtime realtimeWait = new WaitForSecondsRealtime(1.5f);
 
         public int Money { get; private set; } = 0;
 
@@ -209,7 +210,7 @@ namespace Mizu
 
         private IEnumerator MoneyEffect(GameObject scoreObj)
         {
-            yield return waitTime;
+            yield return realtimeWait;
             GameManager.Inst.ScoreUIPool.ReturnObject(scoreObj);
         }
     }
