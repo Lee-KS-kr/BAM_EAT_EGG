@@ -63,7 +63,7 @@ namespace Mizu
             else
                 _lengthUpgradeBtn.interactable = true;
 
-            if (Money < levStruct.costs[_incomeLev - 1]|| _incomeLev == levStruct.levels[levStruct.levels.Length - 1])
+            if (Money < levStruct.costs[_incomeLev - 1] || _incomeLev == levStruct.levels[levStruct.levels.Length - 1])
                 _incomeUpgradeBtn.interactable = false;
             else
                 _incomeUpgradeBtn.interactable = true;
@@ -104,11 +104,11 @@ namespace Mizu
             {
                 elapsedTime += Time.deltaTime;
 
-                if(elapsedTime >= benchmarkTime)
+                if (elapsedTime >= benchmarkTime)
                 {
                     if (Money >= levStruct.costs[_lengthLev - 1])
                     {
-                        elapsedTime -= (Time.deltaTime * 20);
+                        elapsedTime -= (Time.deltaTime * 10);
                         LengthUpgrade();
                     }
                     else

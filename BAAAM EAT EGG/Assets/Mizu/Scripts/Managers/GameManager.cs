@@ -16,7 +16,7 @@ public sealed class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -30,6 +30,7 @@ public sealed class GameManager : MonoBehaviour
     private void Start()
     {
         Initialize();
+        Application.targetFrameRate = 300;
     }
 
     private void Initialize()
